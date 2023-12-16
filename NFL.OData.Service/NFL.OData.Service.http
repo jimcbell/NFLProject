@@ -1,0 +1,6 @@
+@NFL.OData.Service_HostAddress = http://localhost:5133
+
+GET {{NFL.OData.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
