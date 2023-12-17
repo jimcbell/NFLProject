@@ -14,6 +14,6 @@ public class MappingNFLProfile: Profile
 {
     public MappingNFLProfile()
     {
-        CreateMap<NflRecord, NFLPlay>();
+        CreateMap<NflRecord, NflPlay>();
     }
 }

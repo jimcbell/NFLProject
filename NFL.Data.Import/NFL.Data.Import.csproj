@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NFL.SqlServer.DataContext\NFL.SqlServer.DataContext.csproj" />
+    <ProjectReference Include="..\NFL.SqlServer.DataContext\Nfl.SqlServer.DataContext.csproj" />
   </ItemGroup>
 
   <ItemGroup>

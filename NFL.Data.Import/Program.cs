@@ -3,8 +3,8 @@ using CsvHelper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Nfl.SqlServer.DataContext.Entities;
 using NFL.SqlServer.DataContext;
-using NFL.SqlServer.DataContext.Entities;
 using NFLDataImport;
 using NFLDataImport.Models;
 using System;
@@ -36,7 +36,7 @@ using (StreamReader reader = new(path))
     }
 }
 
-List<NFLPlay> nflPlays = mapper.Map<List<NFLPlay>>(records);
+List<NflPlay> nflPlays = mapper.Map<List<NflPlay>>(records);
 string? connectionString = configuration.GetConnectionString("NFL");
 if (string.IsNullOrEmpty(connectionString))
 {
@@ -45,7 +45,14 @@ if (string.IsNullOrEmpty(connectionString))
 DbContextOptions options = new DbContextOptionsBuilder<NFLDataContext>()
     .UseSqlServer(connectionString)
     .Options;
-NFLDataContext context = new();
-context.AddRange(nflPlays);
-context.SaveChanges();
+using (NFLDataContext context = new())
+{
+    //foreach (NflPlay play in nflPlays)
+    //{
+    //    play.NflPlayTypeId = context.NflPlayTypes.Where(e => e.PlayType == play.PlayType).Select(e => e.Id).FirstOrDefault();
+    //}
+    context.AddRange(nflPlays);
+    context.SaveChanges();
+}
+    
 Console.ReadLine();
