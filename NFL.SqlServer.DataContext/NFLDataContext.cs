@@ -5,7 +5,7 @@ namespace NFL.SqlServer.DataContext
 {
     public partial class NFLDataContext : DbContext
     {
-        public DbSet<NFLPlay> NFLPlays { get; set; }
+        public virtual DbSet<NFLPlay> NFLPlays { get; set; }
         public NFLDataContext()
         {
             
