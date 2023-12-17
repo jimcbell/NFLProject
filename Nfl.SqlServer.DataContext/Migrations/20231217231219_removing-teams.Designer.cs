@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NFL.SqlServer.DataContext;
 
 #nullable disable
 
-namespace NFL.SqlServer.DataContext.Migrations
+namespace Nfl.SqlServer.DataContext.Migrations
 {
     [DbContext(typeof(NFLDataContext))]
-    partial class NFLDataContextModelSnapshot : ModelSnapshot
+    [Migration("20231217231219_removing-teams")]
+    partial class removingteams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

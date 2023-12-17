@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NFL.SqlServer.DataContext;
 
 #nullable disable
 
-namespace NFL.SqlServer.DataContext.Migrations
+namespace Nfl.SqlServer.DataContext.Migrations
 {
     [DbContext(typeof(NFLDataContext))]
-    partial class NFLDataContextModelSnapshot : ModelSnapshot
+    [Migration("20231217223711_pass-type-relationship")]
+    partial class passtyperelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,8 +53,9 @@ namespace NFL.SqlServer.DataContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayId"));
 
-                    b.Property<int?>("DefensiveTeamId")
-                        .HasColumnType("int");
+                    b.Property<string>("DefenseTeam")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DefenseTeam");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)")
@@ -145,8 +149,13 @@ namespace NFL.SqlServer.DataContext.Migrations
                     b.Property<int?>("NflPlayTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OffensiveTeamId")
-                        .HasColumnType("int");
+                    b.Property<string>("OffenseTeam")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OffenseTeam");
+
+                    b.Property<string>("PassType")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PassType");
 
                     b.Property<string>("PenaltyTeam")
                         .HasColumnType("nvarchar(max)");
@@ -197,13 +206,9 @@ namespace NFL.SqlServer.DataContext.Migrations
 
                     b.HasKey("PlayId");
 
-                    b.HasIndex("DefensiveTeamId");
-
                     b.HasIndex("NflPassTypeId");
 
                     b.HasIndex("NflPlayTypeId");
-
-                    b.HasIndex("OffensiveTeamId");
 
                     b.HasIndex("PlayId")
                         .IsUnique();
@@ -230,29 +235,8 @@ namespace NFL.SqlServer.DataContext.Migrations
                     b.ToTable("NflPlayType", (string)null);
                 });
 
-            modelBuilder.Entity("Nfl.SqlServer.DataContext.Entities.NflTeam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NflTeam", (string)null);
-                });
-
             modelBuilder.Entity("Nfl.SqlServer.DataContext.Entities.NflPlay", b =>
                 {
-                    b.HasOne("Nfl.SqlServer.DataContext.Entities.NflTeam", "DefensiveTeam")
-                        .WithMany("DefensiveTeamPlays")
-                        .HasForeignKey("DefensiveTeamId");
-
                     b.HasOne("Nfl.SqlServer.DataContext.Entities.NflPassType", "NflPassType")
                         .WithMany("NflPlays")
                         .HasForeignKey("NflPassTypeId");
@@ -261,17 +245,9 @@ namespace NFL.SqlServer.DataContext.Migrations
                         .WithMany("NflPlays")
                         .HasForeignKey("NflPlayTypeId");
 
-                    b.HasOne("Nfl.SqlServer.DataContext.Entities.NflTeam", "OffensiveTeam")
-                        .WithMany("OffensiveTeamPlays")
-                        .HasForeignKey("OffensiveTeamId");
-
-                    b.Navigation("DefensiveTeam");
-
                     b.Navigation("NflPassType");
 
                     b.Navigation("NflPlayType");
-
-                    b.Navigation("OffensiveTeam");
                 });
 
             modelBuilder.Entity("Nfl.SqlServer.DataContext.Entities.NflPassType", b =>
@@ -282,13 +258,6 @@ namespace NFL.SqlServer.DataContext.Migrations
             modelBuilder.Entity("Nfl.SqlServer.DataContext.Entities.NflPlayType", b =>
                 {
                     b.Navigation("NflPlays");
-                });
-
-            modelBuilder.Entity("Nfl.SqlServer.DataContext.Entities.NflTeam", b =>
-                {
-                    b.Navigation("DefensiveTeamPlays");
-
-                    b.Navigation("OffensiveTeamPlays");
                 });
 #pragma warning restore 612, 618
         }

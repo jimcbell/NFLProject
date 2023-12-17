@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NFL.SqlServer.DataContext;
 
 #nullable disable
 
-namespace NFL.SqlServer.DataContext.Migrations
+namespace Nfl.SqlServer.DataContext.Migrations
 {
     [DbContext(typeof(NFLDataContext))]
-    partial class NFLDataContextModelSnapshot : ModelSnapshot
+    [Migration("20231217230607_team-table-name")]
+    partial class teamtablename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,6 +52,10 @@ namespace NFL.SqlServer.DataContext.Migrations
                         .HasColumnName("RecordID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayId"));
+
+                    b.Property<string>("DefenseTeam")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("DefenseTeam");
 
                     b.Property<int?>("DefensiveTeamId")
                         .HasColumnType("int");
@@ -144,6 +151,10 @@ namespace NFL.SqlServer.DataContext.Migrations
 
                     b.Property<int?>("NflPlayTypeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("OffenseTeam")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OffenseTeam");
 
                     b.Property<int?>("OffensiveTeamId")
                         .HasColumnType("int");

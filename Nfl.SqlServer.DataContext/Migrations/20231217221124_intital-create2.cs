@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace NFL.SqlServer.DataContext.Migrations
+namespace Nfl.SqlServer.DataContext.Migrations
 {
     /// <inheritdoc />
-    public partial class initscaffold : Migration
+    public partial class intitalcreate2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "NFLPlay",
+                name: "NflPlay",
                 columns: table => new
                 {
                     RecordID = table.Column<int>(type: "int", nullable: false)
@@ -59,13 +59,32 @@ namespace NFL.SqlServer.DataContext.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NFLPlay", x => x.RecordID);
+                    table.PrimaryKey("PK_NflPlay", x => x.RecordID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NflPlayType",
+                columns: table => new
+                {
+                    PlayTypeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlayType = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NflPlayType", x => x.PlayTypeId);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_NFLPlay_RecordID",
-                table: "NFLPlay",
+                name: "IX_NflPlay_RecordID",
+                table: "NflPlay",
                 column: "RecordID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NflPlayType_PlayTypeId",
+                table: "NflPlayType",
+                column: "PlayTypeId",
                 unique: true);
         }
 
@@ -73,7 +92,10 @@ namespace NFL.SqlServer.DataContext.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "NFLPlay");
+                name: "NflPlay");
+
+            migrationBuilder.DropTable(
+                name: "NflPlayType");
         }
     }
 }

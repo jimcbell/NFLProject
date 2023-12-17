@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NFL.SqlServer.DataContext.Entities;
+using Nfl.SqlServer.DataContext.Entities;
 
 namespace NFL.SqlServer.DataContext
 {
     public partial class NFLDataContext : DbContext
     {
-        public virtual DbSet<NFLPlay> NFLPlays { get; set; }
+        public virtual DbSet<NflPlay> NflPlays { get; set; }
+        public virtual DbSet<NflPlayType> NflPlayTypes { get; set; }
+        public virtual DbSet<NflPassType> NflPassTypes { get; set; }
+        public virtual DbSet<NflTeam> NflTeams { get; set; }
         public NFLDataContext()
         {
             
@@ -19,12 +22,12 @@ namespace NFL.SqlServer.DataContext
             // Should be configured from app that runs the libray, else defaulting to local connection string.
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=NFL;Integrated Security=true;TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Nfl;Integrated Security=true;TrustServerCertificate=true;");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<NFLPlay>(entity =>
+            modelBuilder.Entity<NflPlay>(entity =>
             {
                 entity.HasKey(e => e.PlayId);
                 entity.HasIndex(e => e.PlayId).IsUnique(true);
@@ -35,8 +38,8 @@ namespace NFL.SqlServer.DataContext
                 entity.Property(e => e.Quarter).HasColumnName("Quarter");
                 entity.Property(e => e.Minute).HasColumnName("Minute");
                 entity.Property(e => e.Second).HasColumnName("Second");
-                entity.Property(e => e.OffenseTeam).HasColumnName("OffenseTeam");
-                entity.Property(e => e.DefenseTeam).HasColumnName("DefenseTeam");
+                //entity.Property(e => e.OffenseTeam).HasColumnName("OffenseTeam");
+                //entity.Property(e => e.DefenseTeam).HasColumnName("DefenseTeam");
                 entity.Property(e => e.Down).HasColumnName("Down");
                 entity.Property(e => e.ToGo).HasColumnName("ToGo");
                 entity.Property(e => e.YardLine).HasColumnName("YardLine");
@@ -47,12 +50,12 @@ namespace NFL.SqlServer.DataContext
                 entity.Property(e => e.SeasonYear).HasColumnName("SeasonYear");
                 entity.Property(e => e.Yards).HasColumnName("Yards");
                 entity.Property(e => e.Formation).HasColumnName("Formation");
-                entity.Property(e => e.PlayType).HasColumnName("PlayType");
+                //entity.Property(e => e.PlayType).HasColumnName("PlayType");
                 entity.Property(e => e.IsRush).HasColumnName("IsRush");
                 entity.Property(e => e.IsPass).HasColumnName("IsPass");
                 entity.Property(e => e.IsIncomplete).HasColumnName("IsIncomplete");
                 entity.Property(e => e.IsTouchdown).HasColumnName("IsTouchdown");
-                entity.Property(e => e.PassType).HasColumnName("PassType");
+                //entity.Property(e => e.PassType).HasColumnName("PassType");
                 entity.Property(e => e.IsSack).HasColumnName("IsSack");
                 entity.Property(e => e.IsChallenge).HasColumnName("IsChallenge");
                 entity.Property(e => e.IsChallengeReversed).HasColumnName("IsChallengeReversed");
@@ -62,8 +65,23 @@ namespace NFL.SqlServer.DataContext
                 entity.Property(e => e.IsPenalty).HasColumnName("IsPenalty");
                 entity.Property(e => e.IsTwoPointConversion).HasColumnName("IsTwoPointConversion");
                 entity.Property(e => e.IsTwoPointConversionSuccessful).HasColumnName("TwoPointConSuccess");
-                entity.ToTable("NFLPlay");
+                entity.ToTable("NflPlay");
                 OnModelCreatingPartial(modelBuilder);
+            });
+            modelBuilder.Entity<NflPlayType>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.Id).IsUnique(true);
+                entity.ToTable("NflPlayType");
+
+            });
+            modelBuilder.Entity<NflPassType>(entity => {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.Id).IsUnique(true);
+                entity.ToTable("NflPassType");
+            });
+            modelBuilder.Entity<NflTeam>(entity => {
+                entity.ToTable("NflTeam");
             });
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
