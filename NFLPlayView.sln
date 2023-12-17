@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFL.SqlServer.DataContext", "NFL.SqlServer.DataContext\NFL.SqlServer.DataContext.csproj", "{B5BC5903-7C50-42CC-9060-9E4D52586409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfl.SqlServer.DataContext", "NFL.SqlServer.DataContext\Nfl.SqlServer.DataContext.csproj", "{B5BC5903-7C50-42CC-9060-9E4D52586409}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NFL.Data.Import", "NFL.Data.Import\NFL.Data.Import.csproj", "{9FD47B3D-0B26-4511-9263-00828483CE70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfl.Data.Import", "NFL.Data.Import\Nfl.Data.Import.csproj", "{9FD47B3D-0B26-4511-9263-00828483CE70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFL.OData.Service", "NFL.OData.Service\NFL.OData.Service.csproj", "{8CFB348D-4AD5-41B3-8A4D-5A14D4198729}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfl.OData.Service", "NFL.OData.Service\Nfl.OData.Service.csproj", "{8CFB348D-4AD5-41B3-8A4D-5A14D4198729}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFL.OData.Client.Mvc", "NFL.OData.Client.Mvc\NFL.OData.Client.Mvc.csproj", "{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfl.OData.Client.Mvc", "NFL.OData.Client.Mvc\Nfl.OData.Client.Mvc.csproj", "{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpResponseMessageExtensions", "..\..\class-libs\JCLibraries\OData.Json.Helper\HttpResponseMessageExtensions.csproj", "{CFF0F29E-6ED5-4AF1-A9AC-2DA896A8FA57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF0F29E-6ED5-4AF1-A9AC-2DA896A8FA57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF0F29E-6ED5-4AF1-A9AC-2DA896A8FA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF0F29E-6ED5-4AF1-A9AC-2DA896A8FA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF0F29E-6ED5-4AF1-A9AC-2DA896A8FA57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
