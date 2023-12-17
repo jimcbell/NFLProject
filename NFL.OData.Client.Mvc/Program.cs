@@ -1,3 +1,4 @@
+using NFL.OData.Client.Mvc.Adapters;
 using System.Net.Http.Headers; // MediaTypeWithQualityHeaderValue
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddHttpClient("ODataServer", c =>
     c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(
         "application/json", 1.0));
 });
+builder.Services.AddScoped<IODataAdapter, ODataAdapter>();
 
 var app = builder.Build();
 

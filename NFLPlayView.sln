@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NFL.Data.Import", "NFL.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFL.OData.Service", "NFL.OData.Service\NFL.OData.Service.csproj", "{8CFB348D-4AD5-41B3-8A4D-5A14D4198729}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFL.OData.Client.Mvc", "NFL.OData.Client.Mvc\NFL.OData.Client.Mvc.csproj", "{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8CFB348D-4AD5-41B3-8A4D-5A14D4198729}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CFB348D-4AD5-41B3-8A4D-5A14D4198729}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CFB348D-4AD5-41B3-8A4D-5A14D4198729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8E25ADF-DCAA-445D-BAE0-201DD8E6923A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

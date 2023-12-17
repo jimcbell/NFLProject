@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using NFL.OData.Client.Mvc.Adapters;
 using NFL.OData.Client.Mvc.Models;
 using NFL.OData.Client.Mvc.Services;
 using NFL.SqlServer.DataContext.Entities;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace NFL.OData.Client.Mvc.Controllers
 {
@@ -11,24 +13,19 @@ namespace NFL.OData.Client.Mvc.Controllers
         public List<NFLPlay> NFLPlays { get; set; } = new();
         private readonly ILogger<HomeController> _logger;
         private IHttpClientFactory _clientFactory;
+        private IODataAdapter _adapter;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IODataAdapter adapter)
         {
             _logger = logger;
             _clientFactory = clientFactory;
+            _adapter = adapter;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            Uri uri = new Uri("https://localhost:5134");
-            NFLPlayContainer container = new NFLPlayContainer(uri);
-            var query = container.NFLPlays.;
-            foreach(var play in query)
-            {
-                NFLPlays.Add(play);
-            }   
-            HttpClient httpClient = _clientFactory.CreateClient("NFLPlay");
-            var response = httpClient.GetAsync("NFLPlay").Result;
+            JsonElement jsonElement = await _adapter.GetODataObject<NFLPlay>();
+
             return View();
         }
 
