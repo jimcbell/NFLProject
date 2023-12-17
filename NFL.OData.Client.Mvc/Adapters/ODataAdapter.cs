@@ -1,10 +1,12 @@
-﻿using System.Text.Json;
+﻿using Nfl.SqlServer.DataContext.Entities;
+using OData.Json.Helper;
+using System.Text.Json;
 
 namespace NFL.OData.Client.Mvc.Adapters
 {
     public interface IODataAdapter
     {
-        Task<JsonElement> GetODataObject<T>();
+        Task<List<NflPlay>> GetODataObject<T>();
     }
     public class ODataAdapter : IODataAdapter
     {
@@ -14,14 +16,14 @@ namespace NFL.OData.Client.Mvc.Adapters
         {
             _clientFactory = clientFactory;
         }
-        public async Task<JsonElement> GetODataObject<T>()
+        public async Task<List<NflPlay>> GetODataObject<T>()
         {
-            HttpClient client = _clientFactory.CreateClient("NFLPlay");
-            HttpRequestMessage request = new HttpRequestMessage();
-            request.Method = HttpMethod.Get;
+            HttpClient client = _clientFactory.CreateClient("ODataServer");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "nflplays/NFLPlay");
             HttpResponseMessage response = await client.SendAsync(request);
-            JsonElement jsonElement = await response.Content.ReadFromJsonAsync<JsonElement>();
-            return jsonElement!;
+            List<NflPlay> nflPlays = await response.ParseContent<List<NflPlay>>() ?? new();
+            string text = await response.Content.ReadAsStringAsync();
+            return nflPlays;
         }
     }
 }

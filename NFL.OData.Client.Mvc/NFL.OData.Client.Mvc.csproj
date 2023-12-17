@@ -11,7 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NFL.SqlServer.DataContext\NFL.SqlServer.DataContext.csproj" />
+    <ProjectReference Include="..\..\..\class-libs\JCLibraries\OData.Json.Helper\HttpResponseMessageExtensions.csproj" />
+    <ProjectReference Include="..\NFL.SqlServer.DataContext\Nfl.SqlServer.DataContext.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

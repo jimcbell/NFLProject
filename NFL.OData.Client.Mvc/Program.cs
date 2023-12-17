@@ -1,4 +1,5 @@
 using NFL.OData.Client.Mvc.Adapters;
+using NFL.OData.Client.Mvc.Models;
 using System.Net.Http.Headers; // MediaTypeWithQualityHeaderValue
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.AddHttpClient("ODataServer", c =>
         "application/json", 1.0));
 });
 builder.Services.AddScoped<IODataAdapter, ODataAdapter>();
-
+builder.Services.AddScoped<HomeIndexViewModel>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

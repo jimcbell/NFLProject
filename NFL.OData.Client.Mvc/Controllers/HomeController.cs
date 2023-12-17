@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Nfl.SqlServer.DataContext.Entities;
 using NFL.OData.Client.Mvc.Adapters;
 using NFL.OData.Client.Mvc.Models;
-using NFL.OData.Client.Mvc.Services;
-using NFL.SqlServer.DataContext.Entities;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -10,23 +9,26 @@ namespace NFL.OData.Client.Mvc.Controllers
 {
     public class HomeController : Controller
     {
-        public List<NFLPlay> NFLPlays { get; set; } = new();
+        public List<NflPlay> NFLPlays { get; set; } = [];
+        public HomeIndexViewModel HomeIndexViewModel { get; set; }
         private readonly ILogger<HomeController> _logger;
         private IHttpClientFactory _clientFactory;
         private IODataAdapter _adapter;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IODataAdapter adapter)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IODataAdapter adapter, HomeIndexViewModel model)
         {
             _logger = logger;
             _clientFactory = clientFactory;
             _adapter = adapter;
+            HomeIndexViewModel = model;
         }
 
         public async Task<IActionResult> Index()
         {
-            JsonElement jsonElement = await _adapter.GetODataObject<NFLPlay>();
+            //HomeIndexViewModel viewModel = new HomeIndexViewModel();
+            HomeIndexViewModel.NFLPlays = await _adapter.GetODataObject<NflPlay>();
 
-            return View();
+            return View(HomeIndexViewModel);
         }
 
         public IActionResult Privacy()

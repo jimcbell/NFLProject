@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Nfl.SqlServer.DataContext.Entities
+@model HomeIndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -12,23 +14,22 @@
         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
     </div>
     <div class="form-group">
-        <label for="exampleFormControlSelect1">Down</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+        <label for="down">Down</label>
+        <select multiple class="form-control" id="down" asp-for=@Model.Query.Downs>
+            @foreach(int down in Model.Downs)
+            {
+                <option>@down</option>
+            }
         </select>
     </div>
 
     <div class="form-group">
-        <label for="exampleFormControlSelect2">Play Type</label>
-        <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>Pass</option>
-            <option>Rush</option>
-            <option>Field Goal</option>
-            <option>QB Kneel</option>
-            <option>Clock Stop</option>
+        <label for="playType">Play Type</label>
+        <select multiple class="form-control" id="playType" asp-for=@Model.Query.PlayTypes>
+            @foreach (NflPlayType playType in Model.NflPlayTypes)
+            {
+                <option value=@playType.Id>@playType.Description</option>
+            }
         </select>
     </div>
     <div class="form-group">
@@ -36,38 +37,31 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
 </form>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Offense Team</th>
-            <th scope="col">Defense Team</th>
-            <th scope="col">Down</th>
-            <th scope="col">PlayType</th>
-            <th scope="col">Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+@if(Model.NFLPlays is not null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Offense Team</th>
+                <th scope="col">Defense Team</th>
+                <th scope="col">Down</th>
+                <th scope="col">Play Type</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (NflPlay play in Model.NFLPlays)
+            {
+                <tr>
+                    <th scope="row">@play.PlayId</th>
+                    <td>@play.OffensiveTeam.ShortName</td>
+                    <td>@play.DefensiveTeam.ShortName</td>
+                    <td>@play.Down</td>
+                    <td>@play.NflPlayType.Description</td>
+                    <td>@play.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
