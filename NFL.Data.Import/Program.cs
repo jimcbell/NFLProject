@@ -26,7 +26,7 @@ var mapperConfig = new MapperConfiguration(mc =>
 IMapper mapper = mapperConfig.CreateMapper();
 
 string nflImportFile = "cleaned-nfl-data.csv";
-string path = Path.Combine(Environment.CurrentDirectory, @"ImportData\", nflImportFile);
+string path = Path.Combine(Environment.CurrentDirectory, @"ImportData", nflImportFile);
 List<NflRecord> records;
 using (StreamReader reader = new(path))
 {
