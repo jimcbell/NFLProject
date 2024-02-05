@@ -63,12 +63,12 @@ namespace Nfl.SqlServer.DataContext.Entities
         // Play Type
 
         // EFCore conventions will look for the foreign key, the <entity> - Id is one that it will auto recognize
-        public int? NflPlayTypeId { get; set; }
+        //public int? NflPlayTypeId { get; set; }
         // By EFCore conventions this will be auto recognized as the one side of a one to many relationship
         public NflPlayType? NflPlayType { get; set; }
 
         //Pass Type
-        public int? NflPassTypeId { get; set; }  
+        //public int? NflPassTypeId { get; set; }  
         public NflPassType? NflPassType { get; set; }
         [ForeignKey("OffensiveTeamId")]
         public NflTeam? OffensiveTeam { get; set; }
