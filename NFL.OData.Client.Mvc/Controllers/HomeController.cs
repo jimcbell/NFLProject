@@ -10,25 +10,24 @@ namespace NFL.OData.Client.Mvc.Controllers
     public class HomeController : Controller
     {
         public List<NflPlay> NFLPlays { get; set; } = [];
-        public HomeIndexViewModel HomeIndexViewModel { get; set; }
+        public HomeIndexViewModel ViewModel { get; set; } = new();
         private readonly ILogger<HomeController> _logger;
         private IHttpClientFactory _clientFactory;
         private IODataAdapter _adapter;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IODataAdapter adapter, HomeIndexViewModel model)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IODataAdapter adapter)
         {
             _logger = logger;
             _clientFactory = clientFactory;
             _adapter = adapter;
-            HomeIndexViewModel = model;
         }
 
         public async Task<IActionResult> Index()
         {
             //HomeIndexViewModel viewModel = new HomeIndexViewModel();
-            HomeIndexViewModel.NFLPlays = await _adapter.GetODataObject<NflPlay>();
+            ViewModel.NFLPlays = await _adapter.GetODataObject<NflPlay>();
 
-            return View(HomeIndexViewModel);
+            return View(ViewModel);
         }
 
         public IActionResult Privacy()

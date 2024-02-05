@@ -17,12 +17,12 @@ public class HomeIndexViewModel
     public NflQuery Query { get; set; } = new();
     public IEnumerable<int> Quarters { get; set; } = Enumerable.Range(1,4);  
     public IEnumerable<int> Downs { get; set; } = Enumerable.Range(1,4);
-    public HomeIndexViewModel(NFLDataContext context)
-    {
-        NflPlayTypes = context.NflPlayTypes.ToList();
-        NflPassTypes = context.NflPassTypes.ToList();
-        NflTeams = context.NflTeams.ToList();
-    }
+    //public HomeIndexViewModel(NFLDataContext context)
+    //{
+    //    NflPlayTypes = context.NflPlayTypes.ToList();
+    //    NflPassTypes = context.NflPassTypes.ToList();
+    //    NflTeams = context.NflTeams.ToList();
+    //}
 
 
 }
