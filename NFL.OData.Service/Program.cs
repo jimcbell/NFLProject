@@ -26,7 +26,7 @@ builder.Services.AddControllers()
         // query options
         .Select() // enables the $select query option
         .Filter() // enables the $filter query option
-        //.Expand() // enables the $expand query option - no related tables yet
+        .Expand() // enables the $expand query option - no related tables yet
         .OrderBy() // enables the $orderby query option
         .SetMaxTop(100) // limits the number of results returned to 100
         .Count() // enables the $count query option
