@@ -19,7 +19,8 @@ namespace NFL.OData.Client.Mvc.Adapters
         public async Task<List<NflPlay>> GetODataObject<T>()
         {
             HttpClient client = _clientFactory.CreateClient("ODataServer");
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "nflplays/NFLPlay");
+            string expand = "?expand=NflPlayType,NflPassType,OffensiveTeam,DefensiveTeam";
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "nflplays/NFLPlay" + expand);
             HttpResponseMessage response = await client.SendAsync(request);
             List<NflPlay> nflPlays = await response.ParseContent<List<NflPlay>>() ?? new();
             string text = await response.Content.ReadAsStringAsync();
