@@ -44,5 +44,13 @@
 - Create a local database using the dotnet ef core tools
 - I believe it automatically pulls the database name from the context.cs file.
 - Good chance if you just run dotnet ef database update it should apply the migratoin and create a local database with the name Nfl in your local sql (if running windows).
+- **** You have to be in the Nfl.DataContext folder / project folder ****
 - If not create a local database named Nfl and try again
 - If that doesn't work create your own migration dotnet ef migrations add "initial-migration" then apply it dotnet ef database update.
+- Once you have the database scaffolded you need to run the data import console project
+- Once that is done you need to run all the sql queries in the sql queries folder I have in the data context
+- This is because I took the initial data load which was one large table and I broke off certain tables to create relationships
+    - Ex: I decoupled the teams, I created a table "NflTeam" and then made the Offensive and Defensive team references to the ids
+- Because of the jankiness of the initial data load, you may have to uncomment the properties on the data model.
+- Essentially I had all the properties, then I added the virtual properties that reference related tables and commented out the direct references after I ran the sql queries to create other tables.
+- Probably easier just to ask me how to set it up locally.
