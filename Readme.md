@@ -16,8 +16,9 @@
 ### Technology Used
 - Sql Server 
     - Storing NFL data from a csv dump.
-- Entity Framework Core (Not implemented yet)
-    - Object relational mapper for Gmail Cleaner Database 
+- Entity Framework Core
+    - Object relational mapper for Gmail Cleaner Database
+    - Used the EF Command Line tool to perform data migrations on the new azure sql database instance as well as keeping local database up to date with changes
 - OData
     - Implemented the OData protocol on top of the Asp.Net Core api in order to make the data easily filtered and queried by any client
 - Razor Pages
@@ -38,3 +39,10 @@
     - Used to store secret configuration values
 - Azure App Service (Not implemented yet)
     - Used to host the web application
+
+### If you want to run this locally
+- Create a local database using the dotnet ef core tools
+- I believe it automatically pulls the database name from the context.cs file.
+- Good chance if you just run dotnet ef database update it should apply the migratoin and create a local database with the name Nfl in your local sql (if running windows).
+- If not create a local database named Nfl and try again
+- If that doesn't work create your own migration dotnet ef migrations add "initial-migration" then apply it dotnet ef database update.
