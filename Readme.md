@@ -18,8 +18,12 @@
     - Storing NFL data from a csv dump.
 - Entity Framework Core (Not implemented yet)
     - Object relational mapper for Gmail Cleaner Database 
-- OData (Not implemented yet)
-    - Implemented the OData protocol on top of the Asp.Net Core api in order to make the data easily filtered and queried by any client 
+- OData
+    - Implemented the OData protocol on top of the Asp.Net Core api in order to make the data easily filtered and queried by any client
+- Razor Pages
+    - Initial UI testing, moving on to Blazor Components now
+- XUnit
+    - Testing of the .Net Projects    
 - Blazer (Not implemented yet)
     - Creating the UI for the NFL Project
 - Terraform (Not implemented yet)
@@ -27,9 +31,9 @@
 
 
 ### Azure Infrastructure Used
+- Azure Sql Database
+    - Relational database management system
 - Azure Key Vault (Not implemented yet)
     - Used to store secret configuration values
-- Azure Sql Database (Not implemented yet)
-    - Relational database management system
 - Azure App Service (Not implemented yet)
     - Used to host the web application
